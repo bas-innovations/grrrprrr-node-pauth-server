@@ -1,7 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
-// import Nano from "nano";
+var dotenv = require("dotenv");
+var result = dotenv.config();
+if (result.error) {
+    throw result.error;
+}
 var config = { couch_admin: process.env.COUCH_ADMIN,
     couch_password: process.env.COUCH_PASSWORD,
     couch_host: process.env.COUCH_HOST,
@@ -9,7 +13,9 @@ var config = { couch_admin: process.env.COUCH_ADMIN,
 };
 // let nano = Nano('http://localhost:5984')
 //var nano = require('nano')('http://localhost:5984');
-var nano = require('nano')("http://" + config.couch_admin + ":" + config.couch_password + "@" + config.couch_host + ':' + config.couch_port);
+var connectionString = "http://" + config.couch_admin + ":" + config.couch_password + "@" + config.couch_host + ':' + config.couch_port;
+console.log(connectionString);
+var nano = require('nano')(connectionString);
 var router = express.Router();
 exports.router = router;
 router.get('/database', function (req, res, next) {
@@ -19,7 +25,7 @@ router.get('/database', function (req, res, next) {
 });
 router.post('/database', function (req, res, next) {
     // var nano = require('nano')("http://" + config.couch_admin + ":" + config.couch_password + "@" + config.couch_host + ':' + config.couch_port);
-    // console.log(req);
+    console.log(req);
     if ((req.body.params.username.length > 0) && (req.session)) {
         req.session.username = req.body.params.username;
         var troupeDbId_1 = req.body.params.troupeDbId;

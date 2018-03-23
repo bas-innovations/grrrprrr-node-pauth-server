@@ -1,16 +1,25 @@
 import * as express from 'express';
 import { NextFunction } from 'express-serve-static-core';
-// import Nano from "nano";
 
-let config = { couch_admin: process.env.COUCH_ADMIN,
-  couch_password: process.env.COUCH_PASSWORD,
-  couch_host: process.env.COUCH_HOST,
-  couch_port: process.env.COUCH_PORT
+
+import * as dotenv from 'dotenv';
+const result = dotenv.config()
+if (result.error) {
+  throw result.error
 }
+
+
+let config = {  couch_admin: process.env.COUCH_ADMIN,
+                couch_password: process.env.COUCH_PASSWORD,
+                couch_host: process.env.COUCH_HOST,
+                couch_port: process.env.COUCH_PORT
+              }
 
 // let nano = Nano('http://localhost:5984')
 //var nano = require('nano')('http://localhost:5984');
-let nano = require('nano')("http://" + config.couch_admin + ":" + config.couch_password + "@" + config.couch_host + ':' + config.couch_port);
+let connectionString: string = "http://" + config.couch_admin + ":" + config.couch_password + "@" + config.couch_host + ':' + config.couch_port;
+console.log(connectionString);
+let nano = require('nano')(connectionString);
 
 let router = express.Router();
 
@@ -22,7 +31,7 @@ router.get('/database', (req: any, res: any, next: any) => {
 
 router.post('/database', (req: any, res: any, next: any) => {
     // var nano = require('nano')("http://" + config.couch_admin + ":" + config.couch_password + "@" + config.couch_host + ':' + config.couch_port);
-    // console.log(req);
+    console.log(req);
     if ((req.body.params.username.length > 0) && (req.session)) {
         req.session.username = req.body.params.username;
 
