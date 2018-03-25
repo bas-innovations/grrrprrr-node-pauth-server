@@ -11,6 +11,7 @@ import * as Index from './routes/Index';
 import * as Login from './routes/Login';
 import * as Database from './routes/Database';
 import * as Dialogue from './routes/Dialogue';
+import * as Troupe from './routes/Troupe';
 
 import * as dotenv from 'dotenv';
 const result = dotenv.config()
@@ -60,6 +61,7 @@ app.use('/', Index.router);
 app.use('/', Login.router);
 app.use('/', Database.router);
 app.use('/', Dialogue.router);
+app.use('/', Troupe.router);
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '../views'));

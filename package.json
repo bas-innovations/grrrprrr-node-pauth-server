@@ -1,9 +1,13 @@
 {
-  "name": "cloudo-pauth-server",
+  "name": "cloudo-pauth-server-sl",
   "version": "0.0.1",
   "description": "A node express nano server for cloudo-pauth",
-  "main": "index.js",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "main": "app.js",
   "scripts": {
+    "start": "node ./build/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Benedict Slykerman",
@@ -26,6 +30,7 @@
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
+    "couch-pwd": "git+https://github.com/zemirco/couch-pwd.git",
     "del": "^3.0.0",
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
@@ -36,7 +41,6 @@
     "morgan": "^1.9.0",
     "nano": "^6.4.3",
     "superlogin": "^0.6.1",
-    "superlogin-client": "^0.8.0",
     "typescript": "^2.7.2"
   }
 }

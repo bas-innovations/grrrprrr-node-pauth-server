@@ -10,6 +10,7 @@ var Index = require("./routes/Index");
 var Login = require("./routes/Login");
 var Database = require("./routes/Database");
 var Dialogue = require("./routes/Dialogue");
+var Troupe = require("./routes/Troupe");
 var dotenv = require("dotenv");
 var result = dotenv.config();
 if (result.error) {
@@ -49,6 +50,7 @@ app.use('/', Index.router);
 app.use('/', Login.router);
 app.use('/', Database.router);
 app.use('/', Dialogue.router);
+app.use('/', Troupe.router);
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '../views'));
 app.listen(process.env.PORT, function () {
